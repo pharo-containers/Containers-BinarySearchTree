@@ -29,8 +29,26 @@ CTBSTAbstractNode >> contents: anObject [
 	self subclassResponsibility
 ]
 
+{ #category : 'accessing' }
+CTBSTAbstractNode >> height [
+
+	^ self subclassResponsibility
+]
+
+{ #category : 'enumerating' }
+CTBSTAbstractNode >> inOrderDo: aBlock [
+
+	^ self subclassResponsibility
+]
+
 { #category : 'testing' }
 CTBSTAbstractNode >> isEmpty [
+
+	^ self subclassResponsibility
+]
+
+{ #category : 'testing' }
+CTBSTAbstractNode >> isLeaf [
 
 	^ self subclassResponsibility
 ]

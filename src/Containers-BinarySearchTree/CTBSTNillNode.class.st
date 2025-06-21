@@ -29,10 +29,28 @@ CTBSTNillNode >> contents: anObject [
 	"Do nothing for nil node"
 ]
 
+{ #category : 'accessing' }
+CTBSTNillNode >> height [
+
+	^ 0
+]
+
+{ #category : 'enumerating' }
+CTBSTNillNode >> inOrderDo: aBlock [
+
+	"Do nothing for nil node"
+]
+
 { #category : 'testing' }
 CTBSTNillNode >> isEmpty [
 
 	^ true
+]
+
+{ #category : 'testing' }
+CTBSTNillNode >> isLeaf [
+
+	^ false
 ]
 
 { #category : 'accessing' }

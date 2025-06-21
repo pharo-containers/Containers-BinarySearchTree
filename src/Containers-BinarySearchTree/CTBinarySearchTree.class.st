@@ -18,6 +18,18 @@ CTBinarySearchTree >> add: anObject [
 	^ anObject
 ]
 
+{ #category : 'accessing' }
+CTBinarySearchTree >> height [ 
+
+	^ root height
+]
+
+{ #category : 'enumerating' }
+CTBinarySearchTree >> inOrderDo: aBlock [
+
+	root inOrderDo: aBlock
+]
+
 { #category : 'testing' }
 CTBinarySearchTree >> includes: anObject [
 

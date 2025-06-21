@@ -35,6 +35,20 @@ CTBSTNode >> contents: anObject [
 	contents := anObject
 ]
 
+{ #category : 'accessing' }
+CTBSTNode >> height [
+
+	^ 1 + (left height max: right height)
+]
+
+{ #category : 'enumerating' }
+CTBSTNode >> inOrderDo: aBlock [
+
+	left inOrderDo: aBlock.
+	aBlock value: contents.
+	right inOrderDo: aBlock
+]
+
 { #category : 'initialization' }
 CTBSTNode >> initialize [
 
@@ -47,6 +61,12 @@ CTBSTNode >> initialize [
 CTBSTNode >> isEmpty [
 
 	^ false
+]
+
+{ #category : 'testing' }
+CTBSTNode >> isLeaf [
+
+	^ left isEmpty and: [ right isEmpty ]
 ]
 
 { #category : 'accessing' }
