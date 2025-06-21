@@ -76,6 +76,15 @@ CTBSTNode >> right: aNode [
 ]
 
 { #category : 'accessing' }
+CTBSTNode >> search: anObject [
+
+	contents = anObject ifTrue: [ ^ contents ].
+	^ anObject < contents
+		ifTrue: [ left search: anObject ]
+		ifFalse: [ right search: anObject ]
+]
+
+{ #category : 'accessing' }
 CTBSTNode >> size [
 
 	^ 1 + left size + right size

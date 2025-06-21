@@ -36,6 +36,12 @@ CTBSTNillNode >> isEmpty [
 ]
 
 { #category : 'accessing' }
+CTBSTNillNode >> search: anObject [
+
+	^ nil
+]
+
+{ #category : 'accessing' }
 CTBSTNillNode >> size [
 
 	^ 0

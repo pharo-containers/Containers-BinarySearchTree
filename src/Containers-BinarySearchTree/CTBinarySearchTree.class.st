@@ -18,6 +18,12 @@ CTBinarySearchTree >> add: anObject [
 	^ anObject
 ]
 
+{ #category : 'testing' }
+CTBinarySearchTree >> includes: anObject [
+
+	^ (root search: anObject) notNil
+]
+
 { #category : 'initialization' }
 CTBinarySearchTree >> initialize [
 

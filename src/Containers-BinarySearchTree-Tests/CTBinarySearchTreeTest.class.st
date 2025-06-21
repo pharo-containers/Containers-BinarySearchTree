@@ -40,3 +40,16 @@ CTBinarySearchTreeTest >> testEmpty [
 	self assert: tree isEmpty.
 	self assert: tree size equals: 0
 ]
+
+{ #category : 'tests' }
+CTBinarySearchTreeTest >> testIncludes [
+
+	tree add: 50.
+	tree add: 30.
+	tree add: 70.
+	
+	self assert: (tree includes: 50).
+	self assert: (tree includes: 30).
+	self assert: (tree includes: 70).
+	self deny: (tree includes: 99)
+]

@@ -48,6 +48,12 @@ CTBSTAbstractNode >> parent: aNode [
 ]
 
 { #category : 'accessing' }
+CTBSTAbstractNode >> search: anObject [
+
+	^ self subclassResponsibility
+]
+
+{ #category : 'accessing' }
 CTBSTAbstractNode >> size [
 	
 	^ self subclassResponsibility
