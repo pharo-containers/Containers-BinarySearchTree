@@ -18,10 +18,24 @@ CTBinarySearchTree >> add: anObject [
 	^ anObject
 ]
 
+{ #category : 'adding' }
+CTBinarySearchTree >> addAll: aCollection [
+
+	aCollection do: [ :each | self add: each ].
+	^ aCollection
+]
+
+{ #category : 'enumerating' }
+CTBinarySearchTree >> do: aBlock [
+
+	"Alias for inOrderDo: - visits elements in sorted order"
+	self inOrderDo: aBlock
+]
+
 { #category : 'accessing' }
 CTBinarySearchTree >> height [ 
 
-	^ root height
+	^ root isEmpty ifTrue: [ 0 ] ifFalse: [ root height ]
 ]
 
 { #category : 'enumerating' }

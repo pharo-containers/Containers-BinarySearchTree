@@ -18,8 +18,9 @@ CTBSTNode >> addChild: anObject [
 
 	anObject < contents
 		ifTrue: [ left := left addChild: anObject ]
-		ifFalse: [ anObject > contents
-			ifTrue: [ right := right addChild: anObject ] ].
+		ifFalse: [ 
+			anObject > contents
+				ifTrue: [ right := right addChild: anObject ] ].
 	^ self
 ]
 

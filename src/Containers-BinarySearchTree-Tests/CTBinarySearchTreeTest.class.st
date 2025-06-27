@@ -20,9 +20,8 @@ CTBinarySearchTreeTest >> setUp [
 { #category : 'tests' }
 CTBinarySearchTreeTest >> testAddMultipleElements [
 
-	tree add: 50.
-	tree add: 30.
-	tree add: 70.
+	tree addAll: #(50 30 70).
+	
 	self assert: tree size equals: 3
 ]
 
@@ -32,6 +31,17 @@ CTBinarySearchTreeTest >> testAddSingleElement [
 	tree add: 42.
 	self deny: tree isEmpty.
 	self assert: tree size equals: 1
+]
+
+{ #category : 'tests' }
+CTBinarySearchTreeTest >> testDuplicateHandling [
+
+	tree addAll: #( 42 42 50 ).
+
+	self assert: tree size equals: 2.
+
+	self assert: (tree includes: 42).
+	self assert: (tree includes: 50)
 ]
 
 { #category : 'tests' }
@@ -49,26 +59,20 @@ CTBinarySearchTreeTest >> testHeight [
 	tree add: 50.
 	self assert: tree height equals: 1.
 	
-	tree add: 30.
-	self assert: tree height equals: 2.
-	
-	tree add: 70.
+	tree addAll: #(30 70).
 	self assert: tree height equals: 2
 ]
 
 { #category : 'tests' }
 CTBinarySearchTreeTest >> testInOrderTraversal [
 
-	| result |
-	tree add: 50.
-	tree add: 30.
-	tree add: 70.
-	tree add: 20.
-	tree add: 40.
-
+		| result |
+	tree addAll: #(50 30 70 20 40).
+	
 	result := OrderedCollection new.
 	tree inOrderDo: [ :each | result add: each ].
-	self assert: result asArray equals: #( 20 30 40 50 70 )
+	
+	self assert: result asArray equals: #(20 30 40 50 70)
 ]
 
 { #category : 'tests' }
