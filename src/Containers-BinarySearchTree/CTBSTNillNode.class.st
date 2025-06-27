@@ -29,6 +29,18 @@ CTBSTNillNode >> contents: anObject [
 	"Do nothing for nil node"
 ]
 
+{ #category : 'searching' }
+CTBSTNillNode >> findMax [
+
+	^ nil
+]
+
+{ #category : 'searching' }
+CTBSTNillNode >> findMin [
+
+	^ nil
+]
+
 { #category : 'accessing' }
 CTBSTNillNode >> height [
 

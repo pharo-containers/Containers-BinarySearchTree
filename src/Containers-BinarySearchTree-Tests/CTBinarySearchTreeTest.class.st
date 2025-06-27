@@ -52,6 +52,15 @@ CTBinarySearchTreeTest >> testEmpty [
 ]
 
 { #category : 'tests' }
+CTBinarySearchTreeTest >> testFindMinMax [
+
+	tree addAll: #(50 30 70 20 80).
+	
+	self assert: tree findMin equals: 20.
+	self assert: tree findMax equals: 80
+]
+
+{ #category : 'tests' }
 CTBinarySearchTreeTest >> testHeight [
 
 	self assert: tree height equals: 0.
@@ -78,14 +87,12 @@ CTBinarySearchTreeTest >> testInOrderTraversal [
 { #category : 'tests' }
 CTBinarySearchTreeTest >> testIncludes [
 
-	tree add: 50.
-	tree add: 30.
-	tree add: 70.
+	tree addAll: #(50 30 70 20 40).
 	
 	self assert: (tree includes: 50).
 	self assert: (tree includes: 30).
-	self assert: (tree includes: 70).
-	self deny: (tree includes: 99)
+	self deny: (tree includes: 99).
+	self deny: (tree includes: 25)
 ]
 
 { #category : 'tests' }

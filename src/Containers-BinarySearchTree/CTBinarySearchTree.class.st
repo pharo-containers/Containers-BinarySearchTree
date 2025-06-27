@@ -32,6 +32,22 @@ CTBinarySearchTree >> do: aBlock [
 	self inOrderDo: aBlock
 ]
 
+{ #category : 'searching' }
+CTBinarySearchTree >> findMax [ 
+
+	^ self isEmpty 
+		ifTrue: [ nil ]
+		ifFalse: [ root findMax ]
+]
+
+{ #category : 'searching' }
+CTBinarySearchTree >> findMin [
+
+	^ self isEmpty 
+		ifTrue: [ nil ]
+		ifFalse: [ root findMin ]
+]
+
 { #category : 'accessing' }
 CTBinarySearchTree >> height [ 
 

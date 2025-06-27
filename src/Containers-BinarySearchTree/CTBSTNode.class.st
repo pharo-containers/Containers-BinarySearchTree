@@ -36,6 +36,22 @@ CTBSTNode >> contents: anObject [
 	contents := anObject
 ]
 
+{ #category : 'searching' }
+CTBSTNode >> findMax [
+
+	^ right isEmpty
+		ifTrue: [ contents ]
+		ifFalse: [ right findMax ]
+]
+
+{ #category : 'searching' }
+CTBSTNode >> findMin [
+
+	^ left isEmpty
+		ifTrue: [ contents ]
+		ifFalse: [ left findMin ]
+]
+
 { #category : 'accessing' }
 CTBSTNode >> height [
 

@@ -29,6 +29,18 @@ CTBSTAbstractNode >> contents: anObject [
 	self subclassResponsibility
 ]
 
+{ #category : 'searching' }
+CTBSTAbstractNode >> findMax [
+
+	^ self subclassResponsibility
+]
+
+{ #category : 'searching' }
+CTBSTAbstractNode >> findMin [
+
+	^ self subclassResponsibility
+]
+
 { #category : 'accessing' }
 CTBSTAbstractNode >> height [
 
