@@ -25,6 +25,40 @@ CTBinarySearchTree >> addAll: aCollection [
 	^ aCollection
 ]
 
+{ #category : 'converting' }
+CTBinarySearchTree >> asArray [
+
+	| result |
+	result := OrderedCollection new.
+	self inOrderDo: [ :each | result add: each ].
+	^ result asArray
+]
+
+{ #category : 'removing' }
+CTBinarySearchTree >> clear [
+
+	root := CTBSTNillNode new
+]
+
+{ #category : 'enumerating' }
+CTBinarySearchTree >> collect: aBlock [
+
+	| result |
+	result := OrderedCollection new.
+	self inOrderDo: [ :each | result add: (aBlock value: each) ].
+	^ result
+
+]
+
+{ #category : 'enumerating' }
+CTBinarySearchTree >> detect: aBlock ifNone: absentBlock [
+
+	self inOrderDo: [ :each |
+		(aBlock value: each) ifTrue: [ ^ each ]
+	].
+	^ absentBlock value
+]
+
 { #category : 'enumerating' }
 CTBinarySearchTree >> do: aBlock [
 
@@ -83,6 +117,15 @@ CTBinarySearchTree >> isEmpty [
 CTBinarySearchTree >> root [
 
 	^ root isEmpty ifTrue: [ nil ] ifFalse: [ root ]
+]
+
+{ #category : 'enumerating' }
+CTBinarySearchTree >> select: aBlock [
+
+	| result |
+	result := OrderedCollection new.
+	self inOrderDo: [ :each | (aBlock value: each) ifTrue: [ result add: each ] ].
+	^ result
 ]
 
 { #category : 'accessing' }

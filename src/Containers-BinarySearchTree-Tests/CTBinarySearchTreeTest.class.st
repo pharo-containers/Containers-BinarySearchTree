@@ -34,6 +34,43 @@ CTBinarySearchTreeTest >> testAddSingleElement [
 ]
 
 { #category : 'tests' }
+CTBinarySearchTreeTest >> testAsArray [
+	
+	
+	| result |
+		tree addAll: #(50 30 70 20 40).
+
+	result := tree asArray.
+	self assert: result equals: #(20 30 40 50 70)
+]
+
+{ #category : 'tests' }
+CTBinarySearchTreeTest >> testClear [
+
+	tree addAll: #(1 2 3 4 5).
+	tree clear.
+	
+	self assert: tree isEmpty.
+	self assert: tree size equals: 0
+]
+
+{ #category : 'tests' }
+CTBinarySearchTreeTest >> testCollectionMethods [
+	
+		| doubled evens found |
+	tree addAll: #(50 30 70 20 40).
+	
+	doubled := tree collect: [ :each | each * 2 ].
+	self assert: doubled asArray equals: #(40 60 80 100 140).
+	
+	evens := tree select: [ :each | each even ].
+	self assert: evens asArray equals: #(20 30 40 50 70).
+	
+	found := tree detect: [ :each | each > 45 ] ifNone: [ nil ].
+	self assert: found equals: 50
+]
+
+{ #category : 'tests' }
 CTBinarySearchTreeTest >> testDuplicateHandling [
 
 	tree addAll: #( 42 42 50 ).
