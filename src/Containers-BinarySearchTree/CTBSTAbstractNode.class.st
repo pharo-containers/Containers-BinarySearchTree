@@ -77,6 +77,12 @@ CTBSTAbstractNode >> parent: aNode [
 	parent := aNode
 ]
 
+{ #category : 'removing' }
+CTBSTAbstractNode >> removeValue: anObject [
+
+	^ self subclassResponsibility
+]
+
 { #category : 'accessing' }
 CTBSTAbstractNode >> search: anObject [
 

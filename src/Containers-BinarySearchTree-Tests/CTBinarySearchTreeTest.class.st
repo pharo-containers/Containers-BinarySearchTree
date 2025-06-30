@@ -142,3 +142,62 @@ CTBinarySearchTreeTest >> testIsLeaf [
 	self deny: tree root isLeaf.
 	self assert: tree root left isLeaf
 ]
+
+{ #category : 'tests' }
+CTBinarySearchTreeTest >> testRemoveLeafNode [
+
+	tree addAll: #(50 30 70 20).
+	
+	tree remove: 20.
+	self assert: tree size equals: 3.
+	self deny: (tree includes: 20)
+]
+
+{ #category : 'tests' }
+CTBinarySearchTreeTest >> testRemoveNodeWithOneChild [
+
+	tree addAll: #( 50 30 20 ).
+
+	tree remove: 30.
+	self assert: tree size equals: 2.
+	self deny: (tree includes: 30).
+	self assert: (tree includes: 20)
+]
+
+{ #category : 'tests' }
+CTBinarySearchTreeTest >> testRemoveNodeWithTwoChildren [
+
+	tree addAll: #(50 30 70 20 40).
+	
+	tree remove: 30.
+	self assert: tree size equals: 4.
+	self deny: (tree includes: 30)
+]
+
+{ #category : 'tests' }
+CTBinarySearchTreeTest >> testRemoveNonExistentElement [
+
+		| result |
+		
+	tree addAll: #(50 30 70).
+	result := tree remove: 99 ifAbsent: [ #notFound ].
+	self assert: result equals: #notFound.
+	self assert: tree size equals: 3.
+	
+	self should: [ tree remove: 99 ] raise: Error
+]
+
+{ #category : 'tests' }
+CTBinarySearchTreeTest >> testRemoveRoot [
+	"Root with no children"
+	tree add: 50.
+	tree remove: 50.
+	self assert: tree isEmpty.
+	
+	"Root with two children"
+	tree clear.
+	tree addAll: #(50 30 70 20 40 60 80).
+	tree remove: 50.
+	self assert: tree size equals: 6.
+	self deny: (tree includes: 50).
+]

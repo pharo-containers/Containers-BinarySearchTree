@@ -99,6 +99,43 @@ CTBSTNode >> left: aNode [
 	aNode parent: self
 ]
 
+{ #category : 'removing' }
+CTBSTNode >> removeThisNode [
+
+	"Remove this node and return replacement using standard BST algorithm"
+		| successorValue |
+	"Case 1: Leaf node (no children)"
+	(left isEmpty and: [ right isEmpty ]) 
+		ifTrue: [ ^ CTBSTNillNode new ].
+	
+	"Case 2: Only one child"
+	left isEmpty ifTrue: [ ^ right ].
+	right isEmpty ifTrue: [ ^ left ].
+	
+	"Case 3: Two children - replace with inorder successor"
+	successorValue := right findMin.
+	contents := successorValue.
+	right := right removeValue: successorValue.
+	^ self
+]
+
+{ #category : 'removing' }
+CTBSTNode >> removeValue: anObject [
+
+	"Remove node with anObject value and return the new subtree root"
+	
+	anObject < contents ifTrue: [
+		left := left removeValue: anObject.
+		^ self ].
+	
+	anObject > contents ifTrue: [
+		right := right removeValue: anObject.
+		^ self ].
+	
+	"Found the node to remove"
+	^ self removeThisNode
+]
+
 { #category : 'accessing' }
 CTBSTNode >> right [
 

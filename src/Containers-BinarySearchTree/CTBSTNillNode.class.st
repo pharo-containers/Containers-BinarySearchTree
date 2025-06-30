@@ -65,6 +65,13 @@ CTBSTNillNode >> isLeaf [
 	^ false
 ]
 
+{ #category : 'removing' }
+CTBSTNillNode >> removeValue: anObject [
+
+	"Element not found - return self unchanged"
+	^ self
+]
+
 { #category : 'accessing' }
 CTBSTNillNode >> search: anObject [
 

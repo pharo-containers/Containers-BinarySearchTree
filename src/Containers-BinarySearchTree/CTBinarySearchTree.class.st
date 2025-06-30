@@ -113,6 +113,33 @@ CTBinarySearchTree >> isEmpty [
 	^ root isEmpty
 ]
 
+{ #category : 'removing' }
+CTBinarySearchTree >> remove: anObject [
+
+	^ self
+		  remove: anObject
+		  ifAbsent: [
+		  self error: 'Element not found: ' , anObject printString ]
+]
+
+{ #category : 'removing' }
+CTBinarySearchTree >> remove: anObject ifAbsent: aBlock [
+
+	| originalSize |
+	originalSize := self size.
+	root := root removeValue: anObject.
+	^ originalSize = self size 
+		ifTrue: [ aBlock value ]
+		ifFalse: [ anObject ]
+]
+
+{ #category : 'removing' }
+CTBinarySearchTree >> removeAll: aCollection [
+
+	aCollection do: [ :each | self remove: each ifAbsent: [ ] ].
+	^ aCollection
+]
+
 { #category : 'accessing' }
 CTBinarySearchTree >> root [
 
