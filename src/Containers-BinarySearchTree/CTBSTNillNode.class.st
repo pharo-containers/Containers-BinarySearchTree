@@ -65,6 +65,18 @@ CTBSTNillNode >> isLeaf [
 	^ false
 ]
 
+{ #category : 'enumerating' }
+CTBSTNillNode >> postOrderDo: aBlock [
+
+	"Do nothing for nill node"
+]
+
+{ #category : 'enumerating' }
+CTBSTNillNode >> preOrderDo: aBlock [
+
+	"Do nothing for nill node"
+]
+
 { #category : 'removing' }
 CTBSTNillNode >> removeValue: anObject [
 

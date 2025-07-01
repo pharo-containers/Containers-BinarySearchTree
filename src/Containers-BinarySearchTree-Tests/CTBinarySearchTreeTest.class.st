@@ -144,6 +144,31 @@ CTBinarySearchTreeTest >> testIsLeaf [
 ]
 
 { #category : 'tests' }
+CTBinarySearchTreeTest >> testPostOrderTraversal [
+
+	| result |
+	tree addAll: #( 50 30 70 20 ).
+
+	result := OrderedCollection new.
+	tree postOrderDo: [ :each | result add: each ].
+
+	self assert: result last equals: 50.
+	self assert: result asArray equals: #( 20 30 70 50 )
+]
+
+{ #category : 'tests' }
+CTBinarySearchTreeTest >> testPreOrderTraversal [
+
+	| result |
+	tree addAll: #( 50 30 70 20 ).
+
+	result := OrderedCollection new.
+	tree preOrderDo: [ :each | result add: each ].
+	self assert: result first equals: 50.
+	self assert: result asArray equals: #(50 30 20 70)
+]
+
+{ #category : 'tests' }
 CTBinarySearchTreeTest >> testRemoveLeafNode [
 
 	tree addAll: #(50 30 70 20).

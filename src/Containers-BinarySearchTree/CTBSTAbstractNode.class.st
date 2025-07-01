@@ -77,6 +77,18 @@ CTBSTAbstractNode >> parent: aNode [
 	parent := aNode
 ]
 
+{ #category : 'enumerating' }
+CTBSTAbstractNode >> postOrderDo: aBlock [
+
+	^ self subclassResponsibility 
+]
+
+{ #category : 'enumerating' }
+CTBSTAbstractNode >> preOrderDo: aBlock [
+
+	^ self subclassResponsibility 
+]
+
 { #category : 'removing' }
 CTBSTAbstractNode >> removeValue: anObject [
 

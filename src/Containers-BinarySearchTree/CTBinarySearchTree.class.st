@@ -113,6 +113,20 @@ CTBinarySearchTree >> isEmpty [
 	^ root isEmpty
 ]
 
+{ #category : 'enumerating' }
+CTBinarySearchTree >> postOrderDo: aBlock [
+		
+		root postOrderDo: aBlock
+
+
+]
+
+{ #category : 'enumerating' }
+CTBinarySearchTree >> preOrderDo: aBlock [
+
+	root preOrderDo: aBlock.
+]
+
 { #category : 'removing' }
 CTBinarySearchTree >> remove: anObject [
 

@@ -99,6 +99,22 @@ CTBSTNode >> left: aNode [
 	aNode parent: self
 ]
 
+{ #category : 'enumerating' }
+CTBSTNode >> postOrderDo: aBlock [
+
+	left postOrderDo: aBlock.
+	right postOrderDo: aBlock.
+	aBlock value: contents 
+]
+
+{ #category : 'enumerating' }
+CTBSTNode >> preOrderDo: aBlock [
+
+	aBlock value: contents.
+	left preOrderDo: aBlock.
+	right preOrderDo: aBlock
+]
+
 { #category : 'removing' }
 CTBSTNode >> removeThisNode [
 
