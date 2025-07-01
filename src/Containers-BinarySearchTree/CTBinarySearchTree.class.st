@@ -25,6 +25,15 @@ CTBinarySearchTree >> addAll: aCollection [
 	^ aCollection
 ]
 
+{ #category : 'enumerating' }
+CTBinarySearchTree >> anySatisfy: aBlock [
+
+	self inOrderDo: [ :each |
+		(aBlock value: each) ifTrue: [ ^ true ]
+	].
+	^ false
+]
+
 { #category : 'converting' }
 CTBinarySearchTree >> asArray [
 
