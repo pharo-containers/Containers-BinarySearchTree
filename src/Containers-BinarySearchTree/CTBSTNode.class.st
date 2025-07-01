@@ -36,6 +36,24 @@ CTBSTNode >> contents: anObject [
 	contents := anObject
 ]
 
+{ #category : 'enumerating' }
+CTBSTNode >> elementsFrom: min to: max into: aCollection [
+	"If current node is greater than max, only check left subtree"
+	contents > max ifTrue: [
+			left elementsFrom: min to: max into: aCollection.
+			^ self ].
+
+	"If current node is less than min, only check right subtree"
+	contents < min ifTrue: [
+			right elementsFrom: min to: max into: aCollection.
+			^ self ].
+
+	"Current node is in range, check both subtrees and include current"
+	left elementsFrom: min to: max into: aCollection.
+	aCollection add: contents.
+	right elementsFrom: min to: max into: aCollection
+]
+
 { #category : 'searching' }
 CTBSTNode >> findMax [
 

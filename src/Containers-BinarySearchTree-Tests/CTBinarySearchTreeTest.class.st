@@ -169,6 +169,23 @@ CTBinarySearchTreeTest >> testPreOrderTraversal [
 ]
 
 { #category : 'tests' }
+CTBinarySearchTreeTest >> testRangeQuery [
+
+	| result |
+	tree addAll: #( 50 30 70 20 40 60 80 ).
+
+	result := tree elementsFrom: 35 to: 65.
+		self assert: result size equals: 3.
+
+	"Test edge cases"
+	result := tree elementsFrom: 10 to: 15.
+	self assert: result isEmpty.
+
+	result := tree elementsFrom: 15 to: 5. "Invalid range"
+	self assert: result isEmpty
+]
+
+{ #category : 'tests' }
 CTBinarySearchTreeTest >> testRemoveLeafNode [
 
 	tree addAll: #(50 30 70 20).

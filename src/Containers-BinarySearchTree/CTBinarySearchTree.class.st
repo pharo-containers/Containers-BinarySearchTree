@@ -66,6 +66,16 @@ CTBinarySearchTree >> do: aBlock [
 	self inOrderDo: aBlock
 ]
 
+{ #category : 'enumerating' }
+CTBinarySearchTree >> elementsFrom: min to: max [
+
+	| result |
+	min > max ifTrue: [ ^ #() ].
+	result := OrderedCollection new.
+	root elementsFrom: min to: max into: result.
+	^ result
+]
+
 { #category : 'searching' }
 CTBinarySearchTree >> findMax [ 
 

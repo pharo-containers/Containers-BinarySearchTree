@@ -29,6 +29,12 @@ CTBSTNillNode >> contents: anObject [
 	"Do nothing for nil node"
 ]
 
+{ #category : 'enumerating' }
+CTBSTNillNode >> elementsFrom: min to: max into: aCollection [
+
+	"Do nothing for nill node"
+]
+
 { #category : 'searching' }
 CTBSTNillNode >> findMax [
 
