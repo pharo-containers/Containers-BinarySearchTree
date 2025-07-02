@@ -35,6 +35,18 @@ CTBSTAbstractNode >> elementsFrom: min to: max into: aCollection [
 	^ self subclassResponsibility 
 ]
 
+{ #category : 'enumerating' }
+CTBSTAbstractNode >> elementsGreaterThan: anObject into: aCollection [
+
+	^ self subclassResponsibility 
+]
+
+{ #category : 'enumerating' }
+CTBSTAbstractNode >> elementsLessThan: anObject into: aCollection [
+
+	^ self subclassResponsibility 
+]
+
 { #category : 'searching' }
 CTBSTAbstractNode >> findMax [
 

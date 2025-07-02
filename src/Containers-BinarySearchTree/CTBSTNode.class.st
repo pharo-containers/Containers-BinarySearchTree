@@ -54,6 +54,26 @@ CTBSTNode >> elementsFrom: min to: max into: aCollection [
 	right elementsFrom: min to: max into: aCollection
 ]
 
+{ #category : 'enumerating' }
+CTBSTNode >> elementsGreaterThan: anObject into: aCollection [
+
+	"If current node is greater than target, check left subtree and include current"
+	contents > anObject ifTrue: [
+		left elementsGreaterThan: anObject into: aCollection.
+		aCollection add: contents ].
+	"Always check right subtree"
+	right elementsGreaterThan: anObject into: aCollection
+]
+
+{ #category : 'enumerating' }
+CTBSTNode >> elementsLessThan: anObject into: aCollection [
+
+	left elementsLessThan: anObject into: aCollection.
+	contents < anObject ifFalse: [ ^ self ].
+	aCollection add: contents.
+	right elementsLessThan: anObject into: aCollection
+]
+
 { #category : 'searching' }
 CTBSTNode >> findMax [
 

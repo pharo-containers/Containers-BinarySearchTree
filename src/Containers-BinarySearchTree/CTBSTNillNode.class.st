@@ -35,6 +35,18 @@ CTBSTNillNode >> elementsFrom: min to: max into: aCollection [
 	"Do nothing for nill node"
 ]
 
+{ #category : 'enumerating' }
+CTBSTNillNode >> elementsGreaterThan: anObject into: aCollection [
+
+	"Do nothing for nill node"
+]
+
+{ #category : 'enumerating' }
+CTBSTNillNode >> elementsLessThan: anObject into: aCollection [
+
+	"Do nothing for nill node"
+]
+
 { #category : 'searching' }
 CTBSTNillNode >> findMax [
 

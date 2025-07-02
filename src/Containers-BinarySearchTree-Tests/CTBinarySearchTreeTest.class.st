@@ -105,6 +105,18 @@ CTBinarySearchTreeTest >> testCopy [
 ]
 
 { #category : 'tests' }
+CTBinarySearchTreeTest >> testDoMethod [
+
+	| result |
+	tree addAll: #(50 30 70 20 40).
+	
+	result := OrderedCollection new.
+	tree do: [ :each | result add: each ].
+	
+	self assert: result asArray equals: #(20 30 40 50 70)
+]
+
+{ #category : 'tests' }
 CTBinarySearchTreeTest >> testDuplicateHandling [
 
 	tree addAll: #( 42 42 50 ).
@@ -113,6 +125,38 @@ CTBinarySearchTreeTest >> testDuplicateHandling [
 
 	self assert: (tree includes: 42).
 	self assert: (tree includes: 50)
+]
+
+{ #category : 'tests' }
+CTBinarySearchTreeTest >> testElementsGreaterThan [
+
+	| result |
+	tree addAll: #(50 30 70 20 40 60 80).
+	
+	result := tree elementsGreaterThan: 45.
+	self assert: result asArray equals: #(50 60 70 80).
+	
+	result := tree elementsGreaterThan: 80.
+	self assert: result isEmpty.
+	
+	result := tree elementsGreaterThan: 10.
+	self assert: result asArray equals: #(20 30 40 50 60 70 80)
+]
+
+{ #category : 'tests' }
+CTBinarySearchTreeTest >> testElementsLessThan [
+
+	| result |
+	tree addAll: #(50 30 70 20 40 60 80).
+	
+	result := tree elementsLessThan: 45.
+	self assert: result asArray equals: #(20 30 40).
+	
+	result := tree elementsLessThan: 20.
+	self assert: result isEmpty.
+	
+	result := tree elementsLessThan: 90.
+	self assert: result asArray equals: #(20 30 40 50 60 70 80)
 ]
 
 { #category : 'tests' }

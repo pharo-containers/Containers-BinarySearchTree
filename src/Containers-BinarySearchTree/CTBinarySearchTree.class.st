@@ -94,6 +94,24 @@ CTBinarySearchTree >> elementsFrom: min to: max [
 	^ result
 ]
 
+{ #category : 'enumerating' }
+CTBinarySearchTree >> elementsGreaterThan: anObject [
+
+	| result |
+	result := OrderedCollection new.
+	root elementsGreaterThan: anObject into: result.
+	^ result
+]
+
+{ #category : 'enumerating' }
+CTBinarySearchTree >> elementsLessThan: anObject [
+
+	| result |
+	result := OrderedCollection new.
+	root elementsLessThan: anObject into: result.
+	^ result
+]
+
 { #category : 'searching' }
 CTBinarySearchTree >> findMax [ 
 
