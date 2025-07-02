@@ -1,5 +1,9 @@
 "
-I represent an abstract node for Binary Search Tree.
+I am an abstract base class for Binary Search Tree nodes.
+
+I define the common interface that both regular nodes (CTBSTNode) and nil nodes (CTBSTNillNode) must implement, enabling polymorphic behavior throughout the tree structure.
+
+I use the Null Object pattern to eliminate special case handling for empty subtrees, making tree algorithms cleaner and more reliable.
 "
 Class {
 	#name : 'CTBSTAbstractNode',
@@ -27,6 +31,36 @@ CTBSTAbstractNode >> contents [
 CTBSTAbstractNode >> contents: anObject [
 
 	self subclassResponsibility
+]
+
+{ #category : 'enumerating' }
+CTBSTAbstractNode >> elementsFrom: min to: max into: aCollection [
+	
+	^ self subclassResponsibility 
+]
+
+{ #category : 'enumerating' }
+CTBSTAbstractNode >> elementsGreaterThan: anObject into: aCollection [
+
+	^ self subclassResponsibility 
+]
+
+{ #category : 'enumerating' }
+CTBSTAbstractNode >> elementsLessThan: anObject into: aCollection [
+
+	^ self subclassResponsibility 
+]
+
+{ #category : 'searching' }
+CTBSTAbstractNode >> findMax [
+
+	^ self subclassResponsibility
+]
+
+{ #category : 'searching' }
+CTBSTAbstractNode >> findMin [
+
+	^ self subclassResponsibility
 ]
 
 { #category : 'accessing' }
@@ -65,6 +99,30 @@ CTBSTAbstractNode >> parent: aNode [
 	parent := aNode
 ]
 
+{ #category : 'enumerating' }
+CTBSTAbstractNode >> postOrderDo: aBlock [
+
+	^ self subclassResponsibility 
+]
+
+{ #category : 'enumerating' }
+CTBSTAbstractNode >> preOrderDo: aBlock [
+
+	^ self subclassResponsibility 
+]
+
+{ #category : 'searching' }
+CTBSTAbstractNode >> predecessorOf: anObject [
+
+	^ self subclassResponsibility 
+]
+
+{ #category : 'removing' }
+CTBSTAbstractNode >> removeValue: anObject [
+
+	^ self subclassResponsibility
+]
+
 { #category : 'accessing' }
 CTBSTAbstractNode >> search: anObject [
 
@@ -75,4 +133,22 @@ CTBSTAbstractNode >> search: anObject [
 CTBSTAbstractNode >> size [
 	
 	^ self subclassResponsibility
+]
+
+{ #category : 'searching' }
+CTBSTAbstractNode >> successorOf: anObject [
+
+	^ self subclassResponsibility 
+]
+
+{ #category : 'testing' }
+CTBSTAbstractNode >> validateBSTProperty [
+
+	^ self subclassResponsibility 
+]
+
+{ #category : 'private' }
+CTBSTAbstractNode >> validateBSTPropertyWithMin: min max: max [
+
+	^ self subclassResponsibility 
 ]
