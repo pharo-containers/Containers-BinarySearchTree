@@ -124,3 +124,15 @@ CTBSTAbstractNode >> successorOf: anObject [
 
 	^ self subclassResponsibility 
 ]
+
+{ #category : 'testing' }
+CTBSTAbstractNode >> validateBSTProperty [
+
+	^ self subclassResponsibility 
+]
+
+{ #category : 'private' }
+CTBSTAbstractNode >> validateBSTPropertyWithMin: min max: max [
+
+	^ self subclassResponsibility 
+]

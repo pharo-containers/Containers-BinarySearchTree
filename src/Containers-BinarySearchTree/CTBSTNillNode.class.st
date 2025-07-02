@@ -113,3 +113,15 @@ CTBSTNillNode >> successorOf: anObject [
 
 	^ nil
 ]
+
+{ #category : 'testing' }
+CTBSTNillNode >> validateBSTProperty [
+
+	^ true
+]
+
+{ #category : 'private' }
+CTBSTNillNode >> validateBSTPropertyWithMin: min max: max [
+
+	^ true
+]

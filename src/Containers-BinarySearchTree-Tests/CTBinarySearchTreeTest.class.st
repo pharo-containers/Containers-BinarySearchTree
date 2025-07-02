@@ -45,6 +45,21 @@ CTBinarySearchTreeTest >> testAsArray [
 ]
 
 { #category : 'tests' }
+CTBinarySearchTreeTest >> testBSTValidation [
+
+	| emptyTree |
+	emptyTree := CTBinarySearchTree new.
+	self assert: emptyTree validateBSTProperty.
+	
+	tree addAll: #(50 30 70 20 40).
+	self assert: tree validateBSTProperty.
+	
+	"Test after removal"
+	tree remove: 30.
+	self assert: tree validateBSTProperty
+]
+
+{ #category : 'tests' }
 CTBinarySearchTreeTest >> testClear [
 
 	tree addAll: #(1 2 3 4 5).
@@ -75,6 +90,21 @@ CTBinarySearchTreeTest >> testCollectionMethods [
 ]
 
 { #category : 'tests' }
+CTBinarySearchTreeTest >> testCopy [
+	
+	| copiedTree |
+	tree addAll: #(50 30 70).
+	copiedTree := tree copy.
+	
+	self assert: copiedTree size equals: tree size.
+	self assert: copiedTree asArray equals: tree asArray.
+
+	copiedTree add: 99.
+	self deny: (tree includes: 99).
+	self assert: (copiedTree includes: 99)
+]
+
+{ #category : 'tests' }
 CTBinarySearchTreeTest >> testDuplicateHandling [
 
 	tree addAll: #( 42 42 50 ).
@@ -90,6 +120,21 @@ CTBinarySearchTreeTest >> testEmpty [
 
 	self assert: tree isEmpty.
 	self assert: tree size equals: 0
+]
+
+{ #category : 'tests' }
+CTBinarySearchTreeTest >> testEmptyTreeOperations [
+
+		| result |
+	self assert: tree isEmpty.
+	self assert: tree findMin isNil.
+	self assert: tree findMax isNil.
+	self deny: (tree includes: 42).
+
+	result := tree collect: [ :each | each * 2 ].
+	self assert: result isEmpty.
+	
+	self deny: (tree anySatisfy: [ :each | true ])
 ]
 
 { #category : 'tests' }
@@ -145,6 +190,18 @@ CTBinarySearchTreeTest >> testIsLeaf [
 	tree add: 30.
 	self deny: tree root isLeaf.
 	self assert: tree root left isLeaf
+]
+
+{ #category : 'tests' }
+CTBinarySearchTreeTest >> testNegativeNumbersTree [
+	
+		| result |
+	tree addAll: #(-10 -5 0 5 10).
+	
+	self assert: tree findMin equals: -10.
+	self assert: tree findMax equals: 10.
+	result := tree asArray.
+	self assert: result equals: #(-10 -5 0 5 10)
 ]
 
 { #category : 'tests' }

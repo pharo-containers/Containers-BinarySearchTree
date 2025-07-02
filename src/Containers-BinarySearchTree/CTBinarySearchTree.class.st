@@ -59,6 +59,15 @@ CTBinarySearchTree >> collect: aBlock [
 
 ]
 
+{ #category : 'copying' }
+CTBinarySearchTree >> copy [
+
+	| newTree |
+	newTree := self class new.
+	self inOrderDo: [ :each | newTree add: each ].
+	^ newTree
+]
+
 { #category : 'enumerating' }
 CTBinarySearchTree >> detect: aBlock ifNone: absentBlock [
 
@@ -206,4 +215,11 @@ CTBinarySearchTree >> successorOf: anObject [
 
 		"Find the successor (smallest element larger than anObject)"
 	^ root successorOf: anObject
+]
+
+{ #category : 'testing' }
+CTBinarySearchTree >> validateBSTProperty [
+
+	"Validate that the tree maintains BST property"
+	^ root validateBSTProperty
 ]

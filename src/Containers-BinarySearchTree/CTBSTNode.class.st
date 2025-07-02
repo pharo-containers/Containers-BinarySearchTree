@@ -225,3 +225,20 @@ CTBSTNode >> successorOf: anObject [
 	leftResult := left successorOf: anObject.
 	^ leftResult ifNil: [ contents ] ifNotNil: [ leftResult ]
 ]
+
+{ #category : 'testing' }
+CTBSTNode >> validateBSTProperty [
+
+	"Check if BST property holds: left < node < right"
+	^ self validateBSTPropertyWithMin: nil max: nil
+]
+
+{ #category : 'private' }
+CTBSTNode >> validateBSTPropertyWithMin: min max: max [
+
+	(min notNil and: [ contents < min ]) ifTrue: [ ^ false ].
+	(max notNil and: [ contents > max ]) ifTrue: [ ^ false ].
+	
+	^ (left isEmpty or: [ left validateBSTPropertyWithMin: min max: contents ])
+		and: [ right isEmpty or: [ right validateBSTPropertyWithMin: contents max: max ] ]
+]
