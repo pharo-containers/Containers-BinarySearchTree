@@ -1,5 +1,17 @@
 "
-I represent a Binary Search Tree data structure.
+I represent a Binary Search Tree data structure that maintains elements in sorted order.
+
+I provide O(log n) average-case performance for insertion, deletion, and search operations.
+Elements are stored according to the BST property: left subtree < node < right subtree.
+
+Usage:
+    tree := CTBinarySearchTree new.
+    tree addAll: #(50 30 70 20 40).
+    tree asArray. => #(20 30 40 50 70)
+    tree findMin. => 20
+    tree includes: 30. => true
+
+I support standard collection protocol (do:, collect:, select:) and provide specialized tree operations like range queries and predecessor/successor finding.
 "
 Class {
 	#name : 'CTBinarySearchTree',

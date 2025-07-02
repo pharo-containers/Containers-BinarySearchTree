@@ -1,5 +1,9 @@
 "
-I represent an abstract node for Binary Search Tree.
+I am an abstract base class for Binary Search Tree nodes.
+
+I define the common interface that both regular nodes (CTBSTNode) and nil nodes (CTBSTNillNode) must implement, enabling polymorphic behavior throughout the tree structure.
+
+I use the Null Object pattern to eliminate special case handling for empty subtrees, making tree algorithms cleaner and more reliable.
 "
 Class {
 	#name : 'CTBSTAbstractNode',

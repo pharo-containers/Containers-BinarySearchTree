@@ -1,5 +1,9 @@
 "
-I represent a nil node for Binary Search Tree.
+I represent an empty node in a Binary Search Tree using the Null Object pattern.
+
+I provide default 'do nothing' behavior for all tree operations, eliminating the need for nil checks throughout the tree algorithms. This makes the code cleaner and prevents null pointer errors.
+
+When elements are added to me, I create and return a new CTBSTNode containing the element, effectively growing the tree.
 "
 Class {
 	#name : 'CTBSTNillNode',

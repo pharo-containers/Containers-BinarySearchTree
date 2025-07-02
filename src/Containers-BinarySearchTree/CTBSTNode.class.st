@@ -1,5 +1,10 @@
 "
-I represent a node for Binary Search Tree.
+I represent a node in a Binary Search Tree containing actual data.
+
+I hold a value and references to left and right child nodes, maintaining the BST invariant where left child < my contents < right child.
+
+I implement all tree operations recursively, delegating to my children when appropriate. My children are never nil - they are either other CTBSTNode instances or CTBSTNillNode instances.
+
 "
 Class {
 	#name : 'CTBSTNode',

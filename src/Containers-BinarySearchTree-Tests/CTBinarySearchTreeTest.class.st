@@ -1,5 +1,9 @@
 "
-A CTBinarySearchTreeTest is a test class for testing the behavior of CTBinarySearchTree
+I test the Binary Search Tree implementation (CTBinarySearchTree).
+
+I verify correctness of all tree operations including insertion, deletion, search, traversals, and collection protocol methods. I test edge cases like empty trees, single nodes, and complex removal scenarios.
+
+I ensure the BST maintains its ordering property and handles duplicates correctly.
 "
 Class {
 	#name : 'CTBinarySearchTreeTest',
