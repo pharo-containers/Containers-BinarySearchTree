@@ -83,6 +83,12 @@ CTBSTNillNode >> preOrderDo: aBlock [
 	"Do nothing for nill node"
 ]
 
+{ #category : 'searching' }
+CTBSTNillNode >> predecessorOf: anObject [
+
+	^ nil
+]
+
 { #category : 'removing' }
 CTBSTNillNode >> removeValue: anObject [
 
@@ -100,4 +106,10 @@ CTBSTNillNode >> search: anObject [
 CTBSTNillNode >> size [
 
 	^ 0
+]
+
+{ #category : 'searching' }
+CTBSTNillNode >> successorOf: anObject [
+
+	^ nil
 ]

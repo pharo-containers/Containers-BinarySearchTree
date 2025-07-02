@@ -146,6 +146,13 @@ CTBinarySearchTree >> preOrderDo: aBlock [
 	root preOrderDo: aBlock.
 ]
 
+{ #category : 'searching' }
+CTBinarySearchTree >> predecessorOf: anObject [
+
+		"Find the predecessor (largest element smaller than anObject)"
+	^ root predecessorOf: anObject
+]
+
 { #category : 'removing' }
 CTBinarySearchTree >> remove: anObject [
 
@@ -192,4 +199,11 @@ CTBinarySearchTree >> select: aBlock [
 CTBinarySearchTree >> size [
 
 	^ root size
+]
+
+{ #category : 'searching' }
+CTBinarySearchTree >> successorOf: anObject [
+
+		"Find the successor (smallest element larger than anObject)"
+	^ root successorOf: anObject
 ]

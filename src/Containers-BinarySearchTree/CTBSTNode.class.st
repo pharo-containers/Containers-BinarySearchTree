@@ -133,6 +133,20 @@ CTBSTNode >> preOrderDo: aBlock [
 	right preOrderDo: aBlock
 ]
 
+{ #category : 'searching' }
+CTBSTNode >> predecessorOf: anObject [
+	
+		| rightResult |
+	"Find the largest element smaller than anObject"
+	
+	anObject <= contents ifTrue: [
+		^ left predecessorOf: anObject ].
+	
+	"Current node is potential predecessor, check right subtree for better one"
+	rightResult := right predecessorOf: anObject.
+	^ rightResult ifNil: [ contents ] ifNotNil: [ rightResult ]
+]
+
 { #category : 'removing' }
 CTBSTNode >> removeThisNode [
 
@@ -196,4 +210,18 @@ CTBSTNode >> search: anObject [
 CTBSTNode >> size [
 
 	^ 1 + left size + right size
+]
+
+{ #category : 'searching' }
+CTBSTNode >> successorOf: anObject [
+
+	| leftResult |
+	"Find the smallest element larger than anObject"
+	
+	anObject >= contents ifTrue: [
+		^ right successorOf: anObject ].
+	
+	"Current node is potential successor, check left subtree for better one"
+	leftResult := left successorOf: anObject.
+	^ leftResult ifNil: [ contents ] ifNotNil: [ leftResult ]
 ]

@@ -173,13 +173,34 @@ CTBinarySearchTreeTest >> testPreOrderTraversal [
 ]
 
 { #category : 'tests' }
+CTBinarySearchTreeTest >> testPredecessorSuccessorWithNonExistentElement [
+
+	tree addAll: #( 50 30 70 20 40 60 80 ).
+	
+	self assert: (tree predecessorOf: 35) equals: 30.
+	self assert: (tree successorOf: 35) equals: 40
+]
+
+{ #category : 'tests' }
+CTBinarySearchTreeTest >> testPredecessors [
+
+	tree addAll: #( 50 30 70 20 40 60 80 ).
+
+	self assert: (tree predecessorOf: 50) equals: 40.
+	self assert: (tree predecessorOf: 30) equals: 20.
+	self assert: (tree predecessorOf: 20) isNil
+]
+
+{ #category : 'tests' }
 CTBinarySearchTreeTest >> testRangeQuery [
 
-	| result |
+	| result temp |
 	tree addAll: #( 50 30 70 20 40 60 80 ).
 
 	result := tree elementsFrom: 35 to: 65.
-		self assert: result size equals: 3.
+	temp := result  asArray.
+	self assert: result size equals: 3.
+	self assert: temp equals: #(40 50 60).
 
 	"Test edge cases"
 	result := tree elementsFrom: 10 to: 15.
@@ -246,4 +267,14 @@ CTBinarySearchTreeTest >> testRemoveRoot [
 	tree remove: 50.
 	self assert: tree size equals: 6.
 	self deny: (tree includes: 50).
+]
+
+{ #category : 'tests' }
+CTBinarySearchTreeTest >> testSuccessors [ 
+
+		tree addAll: #(50 30 70 20 40 60 80).
+
+	self assert: (tree successorOf: 50) equals: 60.
+	self assert: (tree successorOf: 70) equals: 80.
+	self assert: (tree successorOf: 80) isNil.
 ]

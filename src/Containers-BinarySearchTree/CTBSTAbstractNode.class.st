@@ -95,6 +95,12 @@ CTBSTAbstractNode >> preOrderDo: aBlock [
 	^ self subclassResponsibility 
 ]
 
+{ #category : 'searching' }
+CTBSTAbstractNode >> predecessorOf: anObject [
+
+	^ self subclassResponsibility 
+]
+
 { #category : 'removing' }
 CTBSTAbstractNode >> removeValue: anObject [
 
@@ -111,4 +117,10 @@ CTBSTAbstractNode >> search: anObject [
 CTBSTAbstractNode >> size [
 	
 	^ self subclassResponsibility
+]
+
+{ #category : 'searching' }
+CTBSTAbstractNode >> successorOf: anObject [
+
+	^ self subclassResponsibility 
 ]
