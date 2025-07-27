@@ -58,9 +58,21 @@ CTBSTNilNode >> findMax [
 ]
 
 { #category : 'searching' }
+CTBSTNilNode >> findMaxNode [
+
+	^ self
+]
+
+{ #category : 'searching' }
 CTBSTNilNode >> findMin [
 
 	^ nil
+]
+
+{ #category : 'searching' }
+CTBSTNilNode >> findMinNode [
+
+	^ self
 ]
 
 { #category : 'accessing' }

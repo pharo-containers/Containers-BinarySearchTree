@@ -58,9 +58,21 @@ CTBSTAbstractNode >> findMax [
 ]
 
 { #category : 'searching' }
+CTBSTAbstractNode >> findMaxNode [
+
+	^ self subclassResponsibility
+]
+
+{ #category : 'searching' }
 CTBSTAbstractNode >> findMin [
 
 	^ self subclassResponsibility
+]
+
+{ #category : 'searching' }
+CTBSTAbstractNode >> findMinNode [
+
+		^ self subclassResponsibility
 ]
 
 { #category : 'accessing' }

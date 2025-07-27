@@ -73,18 +73,29 @@ CTBSTNode >> elementsLessThan: anObject into: aCollection [
 
 { #category : 'searching' }
 CTBSTNode >> findMax [
+^ self findMaxNode contents
+]
+
+{ #category : 'searching' }
+CTBSTNode >> findMaxNode [
 
 	^ right isEmpty
-		ifTrue: [ contents ]
-		ifFalse: [ right findMax ]
+		ifTrue: [ self ]
+		ifFalse: [ right findMaxNode ]
 ]
 
 { #category : 'searching' }
 CTBSTNode >> findMin [
 
+	^ self findMinNode contents
+]
+
+{ #category : 'searching' }
+CTBSTNode >> findMinNode [
+
 	^ left isEmpty
-		ifTrue: [ contents ]
-		ifFalse: [ left findMin ]
+		ifTrue: [ self ]
+		ifFalse: [ left findMinNode ]
 ]
 
 { #category : 'accessing' }
@@ -166,38 +177,33 @@ CTBSTNode >> predecessorOf: anObject [
 
 { #category : 'removing' }
 CTBSTNode >> removeThisNode [
-
-	"Remove this node and return replacement using standard BST algorithm"
-		| successorValue |
-	"Case 1: Leaf node (no children)"
-	(left isEmpty and: [ right isEmpty ]) 
-		ifTrue: [ ^ CTBSTNilNode new ].
-	
-	"Case 2: Only one child"
+	"Remove this specific node and return its replacement.
+	The caller is responsible for linking the replacement into the tree."
+	| successor |
+	"Case 1 & 2: Leaf or single child. Return the non-empty child or the nil node."
 	left isEmpty ifTrue: [ ^ right ].
 	right isEmpty ifTrue: [ ^ left ].
-	
-	"Case 3: Two children - replace with inorder successor"
-	successorValue := right findMin.
-	contents := successorValue.
-	right := right removeValue: successorValue.
+
+	"Case 3: Two children. Replace contents with inorder successor's contents,
+	then remove the successor node from the right subtree."
+	successor := right findMinNode.
+	self contents: successor contents.
+	self right: (right removeValue: successor contents).
 	^ self
 ]
 
 { #category : 'removing' }
 CTBSTNode >> removeValue: anObject [
-
-	"Remove node with anObject value and return the new subtree root"
-	
+	"Find the node with anObject and remove it, returning the new root of this subtree."
 	anObject < contents ifTrue: [
-		left := left removeValue: anObject.
+		self left: (left removeValue: anObject).
 		^ self ].
-	
+
 	anObject > contents ifTrue: [
-		right := right removeValue: anObject.
+		self right: (right removeValue: anObject).
 		^ self ].
-	
-	"Found the node to remove"
+
+	"Found the node to remove. `removeThisNode` will return the replacement."
 	^ self removeThisNode
 ]
 
