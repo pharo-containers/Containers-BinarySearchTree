@@ -113,8 +113,8 @@ CTBSTNode >> inOrderDo: aBlock [
 CTBSTNode >> initialize [
 
 	super initialize.
-	left := CTBSTNillNode new parent: self.
-	right := CTBSTNillNode new parent: self
+	left := CTBSTNilNode new parent: self.
+	right := CTBSTNilNode new parent: self
 ]
 
 { #category : 'testing' }
@@ -179,7 +179,7 @@ CTBSTNode >> removeThisNode [
 		| successorValue |
 	"Case 1: Leaf node (no children)"
 	(left isEmpty and: [ right isEmpty ]) 
-		ifTrue: [ ^ CTBSTNillNode new ].
+		ifTrue: [ ^ CTBSTNilNode new ].
 	
 	"Case 2: Only one child"
 	left isEmpty ifTrue: [ ^ right ].

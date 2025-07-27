@@ -6,14 +6,14 @@ I provide default 'do nothing' behavior for all tree operations, eliminating the
 When elements are added to me, I create and return a new CTBSTNode containing the element, effectively growing the tree.
 "
 Class {
-	#name : 'CTBSTNillNode',
+	#name : 'CTBSTNilNode',
 	#superclass : 'CTBSTAbstractNode',
 	#category : 'Containers-BinarySearchTree',
 	#package : 'Containers-BinarySearchTree'
 }
 
 { #category : 'adding' }
-CTBSTNillNode >> addChild: anObject [
+CTBSTNilNode >> addChild: anObject [
 
 	^ CTBSTNode new
 		contents: anObject;
@@ -22,122 +22,122 @@ CTBSTNillNode >> addChild: anObject [
 ]
 
 { #category : 'accessing' }
-CTBSTNillNode >> contents [
+CTBSTNilNode >> contents [
 
 	^ nil
 ]
 
 { #category : 'accessing' }
-CTBSTNillNode >> contents: anObject [
+CTBSTNilNode >> contents: anObject [
 
 	"Do nothing for nil node"
 ]
 
 { #category : 'enumerating' }
-CTBSTNillNode >> elementsFrom: min to: max into: aCollection [
+CTBSTNilNode >> elementsFrom: min to: max into: aCollection [
 
 	"Do nothing for nill node"
 ]
 
 { #category : 'enumerating' }
-CTBSTNillNode >> elementsGreaterThan: anObject into: aCollection [
+CTBSTNilNode >> elementsGreaterThan: anObject into: aCollection [
 
 	"Do nothing for nill node"
 ]
 
 { #category : 'enumerating' }
-CTBSTNillNode >> elementsLessThan: anObject into: aCollection [
+CTBSTNilNode >> elementsLessThan: anObject into: aCollection [
 
 	"Do nothing for nill node"
 ]
 
 { #category : 'searching' }
-CTBSTNillNode >> findMax [
+CTBSTNilNode >> findMax [
 
 	^ nil
 ]
 
 { #category : 'searching' }
-CTBSTNillNode >> findMin [
+CTBSTNilNode >> findMin [
 
 	^ nil
 ]
 
 { #category : 'accessing' }
-CTBSTNillNode >> height [
+CTBSTNilNode >> height [
 
 	^ 0
 ]
 
 { #category : 'enumerating' }
-CTBSTNillNode >> inOrderDo: aBlock [
+CTBSTNilNode >> inOrderDo: aBlock [
 
 	"Do nothing for nil node"
 ]
 
 { #category : 'testing' }
-CTBSTNillNode >> isEmpty [
+CTBSTNilNode >> isEmpty [
 
 	^ true
 ]
 
 { #category : 'testing' }
-CTBSTNillNode >> isLeaf [
+CTBSTNilNode >> isLeaf [
 
 	^ false
 ]
 
 { #category : 'enumerating' }
-CTBSTNillNode >> postOrderDo: aBlock [
+CTBSTNilNode >> postOrderDo: aBlock [
 
 	"Do nothing for nill node"
 ]
 
 { #category : 'enumerating' }
-CTBSTNillNode >> preOrderDo: aBlock [
+CTBSTNilNode >> preOrderDo: aBlock [
 
 	"Do nothing for nill node"
 ]
 
 { #category : 'searching' }
-CTBSTNillNode >> predecessorOf: anObject [
+CTBSTNilNode >> predecessorOf: anObject [
 
 	^ nil
 ]
 
 { #category : 'removing' }
-CTBSTNillNode >> removeValue: anObject [
+CTBSTNilNode >> removeValue: anObject [
 
 	"Element not found - return self unchanged"
 	^ self
 ]
 
 { #category : 'accessing' }
-CTBSTNillNode >> search: anObject [
+CTBSTNilNode >> search: anObject [
 
 	^ nil
 ]
 
 { #category : 'accessing' }
-CTBSTNillNode >> size [
+CTBSTNilNode >> size [
 
 	^ 0
 ]
 
 { #category : 'searching' }
-CTBSTNillNode >> successorOf: anObject [
+CTBSTNilNode >> successorOf: anObject [
 
 	^ nil
 ]
 
 { #category : 'testing' }
-CTBSTNillNode >> validateBSTProperty [
+CTBSTNilNode >> validateBSTProperty [
 
 	^ true
 ]
 
 { #category : 'private' }
-CTBSTNillNode >> validateBSTPropertyWithMin: min max: max [
+CTBSTNilNode >> validateBSTPropertyWithMin: min max: max [
 
 	^ true
 ]

@@ -58,7 +58,7 @@ CTBinarySearchTree >> asArray [
 { #category : 'removing' }
 CTBinarySearchTree >> clear [
 
-	root := CTBSTNillNode new
+	root := CTBSTNilNode new
 ]
 
 { #category : 'enumerating' }
@@ -162,7 +162,7 @@ CTBinarySearchTree >> includes: anObject [
 CTBinarySearchTree >> initialize [
 
 	super initialize.
-	root := CTBSTNillNode new
+	root := CTBSTNilNode new
 ]
 
 { #category : 'testing' }
