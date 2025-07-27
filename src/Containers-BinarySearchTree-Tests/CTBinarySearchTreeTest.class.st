@@ -49,6 +49,14 @@ CTBinarySearchTreeTest >> testAsArray [
 ]
 
 { #category : 'tests' }
+CTBinarySearchTreeTest >> testAtIfAbsent [
+
+	tree addAll: #(50 30 70).
+	self assert: (tree at: 30 ifAbsent: [ #notFound ]) equals: 30.
+	self assert: (tree at: 99 ifAbsent: [ #notFound ]) equals: #notFound
+]
+
+{ #category : 'tests' }
 CTBinarySearchTreeTest >> testBSTValidation [
 
 	| emptyTree |
@@ -186,12 +194,13 @@ CTBinarySearchTreeTest >> testEmptyTreeOperations [
 ]
 
 { #category : 'tests' }
-CTBinarySearchTreeTest >> testFindMinMax [
+CTBinarySearchTreeTest >> testFirstLast [
 
 	tree addAll: #(50 30 70 20 80).
-	
-	self assert: tree findMin equals: 20.
-	self assert: tree findMax equals: 80
+	self assert: tree first equals: 20.
+	self assert: tree last equals: 80.
+	self assert: CTBinarySearchTree new first isNil.
+	self assert: CTBinarySearchTree new last isNil
 ]
 
 { #category : 'tests' }
@@ -362,16 +371,20 @@ CTBinarySearchTreeTest >> testRemoveNonExistentElement [
 { #category : 'tests' }
 CTBinarySearchTreeTest >> testRemoveRoot [
 	"Root with no children"
+
 	tree add: 50.
 	tree remove: 50.
 	self assert: tree isEmpty.
-	
+
 	"Root with two children"
 	tree clear.
-	tree addAll: #(50 30 70 20 40 60 80).
+	tree addAll: #( 50 30 70 20 40 60 80 ).
 	tree remove: 50.
 	self assert: tree size equals: 6.
 	self deny: (tree includes: 50).
+	
+	self assert: (tree includes: 60).
+	self assert: tree root contents equals: 60
 ]
 
 { #category : 'tests' }

@@ -27,6 +27,7 @@ Class {
 CTBinarySearchTree >> add: anObject [
 
 	root := root addChild: anObject.
+	root parent: nil.
 	^ anObject
 ]
 
@@ -50,25 +51,32 @@ CTBinarySearchTree >> anySatisfy: aBlock [
 CTBinarySearchTree >> asArray [
 
 	| result |
-	result := OrderedCollection new.
+	result := OrderedCollection new: self size.
 	self inOrderDo: [ :each | result add: each ].
 	^ result asArray
+]
+
+{ #category : 'accessing' }
+CTBinarySearchTree >> at: anObject ifAbsent: aBlock [
+
+	| result |
+	result := root search: anObject.
+	^ result ifNil: [ aBlock value ] ifNotNil: [ result ]
 ]
 
 { #category : 'removing' }
 CTBinarySearchTree >> clear [
 
-	root := CTBSTNillNode new
+	root := CTBSTNilNode new
 ]
 
 { #category : 'enumerating' }
 CTBinarySearchTree >> collect: aBlock [
 
 	| result |
-	result := OrderedCollection new.
+	result := OrderedCollection new: self size.
 	self inOrderDo: [ :each | result add: (aBlock value: each) ].
 	^ result
-
 ]
 
 { #category : 'copying' }
@@ -124,26 +132,44 @@ CTBinarySearchTree >> elementsLessThan: anObject [
 	^ result
 ]
 
-{ #category : 'searching' }
-CTBinarySearchTree >> findMax [ 
+{ #category : 'accessing' }
+CTBinarySearchTree >> findMax [
 
-	^ self isEmpty 
-		ifTrue: [ nil ]
-		ifFalse: [ root findMax ]
+	^ root findMax
 ]
 
-{ #category : 'searching' }
+{ #category : 'accessing' }
 CTBinarySearchTree >> findMin [
 
-	^ self isEmpty 
-		ifTrue: [ nil ]
-		ifFalse: [ root findMin ]
+	^ root findMin
+]
+
+{ #category : 'accessing' }
+CTBinarySearchTree >> first [
+
+	^ self findMin
 ]
 
 { #category : 'accessing' }
 CTBinarySearchTree >> height [ 
 
 	^ root isEmpty ifTrue: [ 0 ] ifFalse: [ root height ]
+]
+
+{ #category : 'testing' }
+CTBinarySearchTree >> ifEmpty: aBlock [
+
+	^ self isEmpty
+		ifTrue: [ aBlock value ]
+		ifFalse: [ self ]
+]
+
+{ #category : 'testing' }
+CTBinarySearchTree >> ifNotEmpty: aBlock [
+
+	^ self isEmpty
+		ifFalse: [ aBlock value: self ]
+		ifTrue: [ self ]
 ]
 
 { #category : 'enumerating' }
@@ -155,20 +181,26 @@ CTBinarySearchTree >> inOrderDo: aBlock [
 { #category : 'testing' }
 CTBinarySearchTree >> includes: anObject [
 
-	^ (root search: anObject) notNil
+	^ (self at: anObject ifAbsent: [ nil ]) notNil
 ]
 
 { #category : 'initialization' }
 CTBinarySearchTree >> initialize [
 
 	super initialize.
-	root := CTBSTNillNode new
+	self clear
 ]
 
 { #category : 'testing' }
 CTBinarySearchTree >> isEmpty [
 
 	^ root isEmpty
+]
+
+{ #category : 'accessing' }
+CTBinarySearchTree >> last [
+
+	^ self findMax
 ]
 
 { #category : 'enumerating' }
@@ -198,18 +230,17 @@ CTBinarySearchTree >> remove: anObject [
 	^ self
 		  remove: anObject
 		  ifAbsent: [
-		  self error: 'Element not found: ' , anObject printString ]
+		  NotFound signalFor: anObject in: self ]
 ]
 
 { #category : 'removing' }
 CTBinarySearchTree >> remove: anObject ifAbsent: aBlock [
 
-	| originalSize |
-	originalSize := self size.
+	(self includes: anObject) ifFalse: [ ^ aBlock value ].
+
 	root := root removeValue: anObject.
-	^ originalSize = self size 
-		ifTrue: [ aBlock value ]
-		ifFalse: [ anObject ]
+	root parent: nil. "The new root has no parent"
+	^ anObject
 ]
 
 { #category : 'removing' }

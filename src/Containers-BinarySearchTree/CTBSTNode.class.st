@@ -22,10 +22,9 @@ Class {
 CTBSTNode >> addChild: anObject [
 
 	anObject < contents
-		ifTrue: [ left := left addChild: anObject ]
-		ifFalse: [ 
-			anObject > contents
-				ifTrue: [ right := right addChild: anObject ] ].
+		ifTrue: [ self left: (left addChild: anObject) ]
+		ifFalse: [
+			anObject > contents ifTrue: [ self right: (right addChild: anObject) ] ].
 	^ self
 ]
 
@@ -43,20 +42,13 @@ CTBSTNode >> contents: anObject [
 
 { #category : 'enumerating' }
 CTBSTNode >> elementsFrom: min to: max into: aCollection [
-	"If current node is greater than max, only check left subtree"
-	contents > max ifTrue: [
-			left elementsFrom: min to: max into: aCollection.
-			^ self ].
 
-	"If current node is less than min, only check right subtree"
-	contents < min ifTrue: [
-			right elementsFrom: min to: max into: aCollection.
-			^ self ].
+	contents > min ifTrue: [
+		left elementsFrom: min to: max into: aCollection ].
+	(contents between: min and: max) ifTrue: [ aCollection add: contents ].
 
-	"Current node is in range, check both subtrees and include current"
-	left elementsFrom: min to: max into: aCollection.
-	aCollection add: contents.
-	right elementsFrom: min to: max into: aCollection
+	contents < max ifTrue: [
+		right elementsFrom: min to: max into: aCollection ]
 ]
 
 { #category : 'enumerating' }
@@ -81,18 +73,29 @@ CTBSTNode >> elementsLessThan: anObject into: aCollection [
 
 { #category : 'searching' }
 CTBSTNode >> findMax [
+^ self findMaxNode contents
+]
+
+{ #category : 'searching' }
+CTBSTNode >> findMaxNode [
 
 	^ right isEmpty
-		ifTrue: [ contents ]
-		ifFalse: [ right findMax ]
+		ifTrue: [ self ]
+		ifFalse: [ right findMaxNode ]
 ]
 
 { #category : 'searching' }
 CTBSTNode >> findMin [
 
+	^ self findMinNode contents
+]
+
+{ #category : 'searching' }
+CTBSTNode >> findMinNode [
+
 	^ left isEmpty
-		ifTrue: [ contents ]
-		ifFalse: [ left findMin ]
+		ifTrue: [ self ]
+		ifFalse: [ left findMinNode ]
 ]
 
 { #category : 'accessing' }
@@ -113,8 +116,8 @@ CTBSTNode >> inOrderDo: aBlock [
 CTBSTNode >> initialize [
 
 	super initialize.
-	left := CTBSTNillNode new parent: self.
-	right := CTBSTNillNode new parent: self
+	left := CTBSTNilNode new parent: self.
+	right := CTBSTNilNode new parent: self
 ]
 
 { #category : 'testing' }
@@ -174,38 +177,33 @@ CTBSTNode >> predecessorOf: anObject [
 
 { #category : 'removing' }
 CTBSTNode >> removeThisNode [
-
-	"Remove this node and return replacement using standard BST algorithm"
-		| successorValue |
-	"Case 1: Leaf node (no children)"
-	(left isEmpty and: [ right isEmpty ]) 
-		ifTrue: [ ^ CTBSTNillNode new ].
-	
-	"Case 2: Only one child"
+	"Remove this specific node and return its replacement.
+	The caller is responsible for linking the replacement into the tree."
+	| successor |
+	"Case 1 & 2: Leaf or single child. Return the non-empty child or the nil node."
 	left isEmpty ifTrue: [ ^ right ].
 	right isEmpty ifTrue: [ ^ left ].
-	
-	"Case 3: Two children - replace with inorder successor"
-	successorValue := right findMin.
-	contents := successorValue.
-	right := right removeValue: successorValue.
+
+	"Case 3: Two children. Replace contents with inorder successor's contents,
+	then remove the successor node from the right subtree."
+	successor := right findMinNode.
+	self contents: successor contents.
+	self right: (right removeValue: successor contents).
 	^ self
 ]
 
 { #category : 'removing' }
 CTBSTNode >> removeValue: anObject [
-
-	"Remove node with anObject value and return the new subtree root"
-	
+	"Find the node with anObject and remove it, returning the new root of this subtree."
 	anObject < contents ifTrue: [
-		left := left removeValue: anObject.
+		self left: (left removeValue: anObject).
 		^ self ].
-	
+
 	anObject > contents ifTrue: [
-		right := right removeValue: anObject.
+		self right: (right removeValue: anObject).
 		^ self ].
-	
-	"Found the node to remove"
+
+	"Found the node to remove. `removeThisNode` will return the replacement."
 	^ self removeThisNode
 ]
 
@@ -263,7 +261,8 @@ CTBSTNode >> validateBSTPropertyWithMin: min max: max [
 
 	(min notNil and: [ contents < min ]) ifTrue: [ ^ false ].
 	(max notNil and: [ contents > max ]) ifTrue: [ ^ false ].
-	
-	^ (left isEmpty or: [ left validateBSTPropertyWithMin: min max: contents ])
-		and: [ right isEmpty or: [ right validateBSTPropertyWithMin: contents max: max ] ]
+
+	^ (left validateBSTPropertyWithMin: min max: contents) and: [
+		right validateBSTPropertyWithMin: contents max: max ]
+
 ]
