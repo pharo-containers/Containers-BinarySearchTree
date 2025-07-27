@@ -27,6 +27,7 @@ Class {
 CTBinarySearchTree >> add: anObject [
 
 	root := root addChild: anObject.
+	root parent: nil.
 	^ anObject
 ]
 
@@ -50,7 +51,7 @@ CTBinarySearchTree >> anySatisfy: aBlock [
 CTBinarySearchTree >> asArray [
 
 	| result |
-	result := OrderedCollection new.
+	result := OrderedCollection new: self size.
 	self inOrderDo: [ :each | result add: each ].
 	^ result asArray
 ]
@@ -65,10 +66,9 @@ CTBinarySearchTree >> clear [
 CTBinarySearchTree >> collect: aBlock [
 
 	| result |
-	result := OrderedCollection new.
+	result := OrderedCollection new: self size.
 	self inOrderDo: [ :each | result add: (aBlock value: each) ].
 	^ result
-
 ]
 
 { #category : 'copying' }
@@ -162,7 +162,7 @@ CTBinarySearchTree >> includes: anObject [
 CTBinarySearchTree >> initialize [
 
 	super initialize.
-	root := CTBSTNilNode new
+	self clear
 ]
 
 { #category : 'testing' }
