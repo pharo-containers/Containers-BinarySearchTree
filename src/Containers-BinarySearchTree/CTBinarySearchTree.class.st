@@ -84,7 +84,7 @@ CTBinarySearchTree >> copy [
 
 	| newTree |
 	newTree := self class new.
-	self inOrderDo: [ :each | newTree add: each ].
+	self preOrderDo: [ :each | newTree add: each ].
 	^ newTree
 ]
 
