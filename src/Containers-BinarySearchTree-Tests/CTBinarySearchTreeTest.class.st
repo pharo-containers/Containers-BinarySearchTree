@@ -117,6 +117,27 @@ CTBinarySearchTreeTest >> testCopy [
 ]
 
 { #category : 'tests' }
+CTBinarySearchTreeTest >> testCopyPreservesStructure [
+
+	| copiedTree |
+	
+	tree add: 50.
+	tree add: 30.
+	tree add: 70.
+	
+	self assert: tree height equals: 2.
+	self assert: tree root contents equals: 50.
+	
+	copiedTree := tree copy.
+	
+	self assert: copiedTree height equals: tree height.
+	self assert: copiedTree root contents equals: tree root contents.
+	
+	self assert: copiedTree root left contents equals: 30.
+	self assert: copiedTree root right contents equals: 70.
+]
+
+{ #category : 'tests' }
 CTBinarySearchTreeTest >> testDoMethod [
 
 	| result |
